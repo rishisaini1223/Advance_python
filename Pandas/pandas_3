@@ -1,0 +1,162 @@
+"""
+Pandas Basic Operations
+
+This script demonstrates basic data analysis operations using
+Pandas and NumPy such as:
+- Reading CSV files
+- Data inspection
+- Data selection using loc and iloc
+- Handling missing values
+- Sorting data
+- Converting categorical data to numerical values
+"""
+
+import pandas as pd
+import numpy as np
+
+
+# -----------------------------
+# Load Dataset
+# -----------------------------
+
+df = pd.read_csv("placement.csv")
+
+
+# -----------------------------
+# Basic Data Inspection
+# -----------------------------
+
+print("First 2 rows of dataset:")
+print(df.head(2))
+
+print("\nLast rows of dataset:")
+print(df.tail())
+
+print("\nStatistical summary:")
+print(df.describe())
+
+print("\nDataset information:")
+print(df.info())
+
+
+# -----------------------------
+# Data Selection
+# -----------------------------
+
+# Selecting top-left part of dataframe
+top_left_corner_df = df.iloc[:4, :3]
+print("\nTop Left Corner of DataFrame:")
+print(top_left_corner_df)
+
+# Selecting specific rows and columns
+print("\nSelected rows and columns using loc:")
+print(df.loc[1:3, ['cgpa', 'placed']])
+
+
+# -----------------------------
+# DataFrame Properties
+# -----------------------------
+
+print("\nAxes of DataFrame:")
+print(df.axes)
+
+print("\nData types of each column:")
+print(df.dtypes)
+
+print("\nData type of cgpa column:")
+print(df['cgpa'].dtypes)
+
+print("\nIs DataFrame empty?")
+print(df.empty)
+
+print("\nNumber of dimensions:")
+print(df.ndim)
+
+print("\nShape of DataFrame (rows, columns):")
+print(df.shape)
+
+print("\nTotal rows:", df.shape[0])
+print("Total columns:", df.shape[1])
+
+print("\nTotal elements in DataFrame:")
+print(df.size)
+
+
+# -----------------------------
+# Convert DataFrame to NumPy Array
+# -----------------------------
+
+values_array = df.values
+print("\nNumPy Array Representation:")
+print(values_array)
+
+
+# -----------------------------
+# Copy DataFrame
+# -----------------------------
+
+df_copy = df.copy()
+
+
+# -----------------------------
+# Sorting Data
+# -----------------------------
+
+sorted_df = df.sort_values(by="resume_score")
+print("\nData sorted by resume_score:")
+print(sorted_df)
+
+
+# -----------------------------
+# Second Dataset Example
+# -----------------------------
+
+tips = pd.read_csv("tips.csv")
+
+print("\nTips Dataset:")
+print(tips)
+
+
+# -----------------------------
+# Convert Categorical Column to Numerical
+# -----------------------------
+
+print("\nCount of values in 'sex' column:")
+print(tips['sex'].value_counts())
+
+tips['sex'] = tips['sex'].map({
+    'Male': 1,
+    'Female': 0
+})
+
+print("\nAfter converting categorical to numerical:")
+print(tips)
+
+
+# -----------------------------
+# Data Selection
+# -----------------------------
+
+print("\nUsing loc:")
+print(tips.loc[:5, ['sex', 'tip', 'time']])
+
+print("\nUsing iloc:")
+print(tips.iloc[:3, :4])
+
+
+# -----------------------------
+# Sorting Dataset
+# -----------------------------
+
+sorted_tips = tips.sort_values("total_bill")
+print("\nTips sorted by total_bill:")
+print(sorted_tips)
+
+
+# -----------------------------
+# Shape Information
+# -----------------------------
+
+print("\nShape of tips dataset:", tips.shape)
+print("Rows:", tips.shape[0])
+print("Columns:", tips.shape[1])
